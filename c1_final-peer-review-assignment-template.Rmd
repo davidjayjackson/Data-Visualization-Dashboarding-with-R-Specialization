@@ -96,16 +96,14 @@ Put your code and solution here:
 
 ```{r problem7,include=TRUE,echo=TRUE}
 ## Yeah, I know I am supposed to use recode....
+## This is a trick question because there is
 
-# dat <- dat %>% mutate(tax_scale = if_else(CC18_325d ==1 & CC18_325a ==1,2,0))
-# dat <- dat %>% mutate(tax_scale = if_else(CC18_325d ==1 & CC18_325a ==0,1,0))
-# dat <- dat %>% mutate(tax_scale = if_else(CC18_325d ==0 & CC18_325a ==0,0,0))
- 
-
-dat %>% mutate(tax_scale = 
-                       case_when(CC18_325d ==1 & CC18_325a ==1   ~ 2, 
-                                 CC18_325d ==1 & CC18_325a ==0 ~ 1, 
-                                 CC18_325d ==0 & CC18_325a ==0 ~ 0))
+dat <- dat %>% mutate(tax_scale = 
+                       case_when(CC18_325d ==1 & CC18_325a ==1 ~ 2, 
+                                 CC18_325d ==1 & CC18_325a ==2 ~ 1, 
+                                 CC18_325d ==2 & CC18_325a ==1 ~ 1,
+                                 TRUE ~0
+                                 ))
 dat %>% select(CC18_325d,CC18_325a,tax_scale)
 ```
 
@@ -116,7 +114,7 @@ Use a frequency table command to show how many 0s, 1s, and 2s are in the column 
 Put your code and solution here:
 
 ```{r problem8,include=TRUE,echo=TRUE}
-#Put your code here, then delete this commented line before submission. Don't modify the setup code for this chunk - you want your code and output to both display.
+table(dat$tax_scale)
 ```
 
 # Problem 9
